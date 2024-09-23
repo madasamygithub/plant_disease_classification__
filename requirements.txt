@@ -3,4 +3,3 @@ flask==3.0.3
 numpy
 gunicorn==20.1.0  
 Werkzeug==2.2.2
-python==3.10
