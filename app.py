@@ -1,19 +1,16 @@
-from flask import Flask, request, jsonify, render_template
-from urllib.parse import quote as url_quote
-
+from flask import Flask, request, jsonify
 import tensorflow as tf
-
 import numpy as np
 import os
 
 # Initialize the Flask app
 app = Flask(__name__)
-  
-# Load the modelnn
+
+# Load the model
 model = tf.keras.models.load_model('trained_plant_disease_model.keras')
 
 # List of class labels
-CLASS_NAMES = CLASS_NAMES = [
+CLASS_NAMES = [
     'Apple___Apple_scab', 'Apple___Black_rot', 'Apple___Cedar_apple_rust', 'Apple___healthy',
     'Blueberry___healthy', 'Cherry_(including_sour)___Powdery_mildew', 
     'Cherry_(including_sour)___healthy', 'Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot', 
@@ -64,13 +61,6 @@ def predict():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
-# Serve the HTML form
-@app.route('/')
-def home():
-    return render_template('index.html')
-
 # Run the app
 if __name__ == '__main__':
     app.run(debug=True)
-
-
